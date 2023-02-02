@@ -1,6 +1,6 @@
 let fileInput = document.getElementById("file");
 let images = document.querySelector(".images");
-
+let Arr=[];
 fileInput.addEventListener("change", function (e) {
   let files = Array.from(e.target.files);
   files.forEach((file) => {
@@ -28,12 +28,13 @@ function ShowImage(file) {
     closeBtton.addEventListener("click", function () {
       image.remove();
       let btn = document.createElement("button");
-      btn.className = "btn btn-outline-primary";
+      btn.className = "btnn btn btn-outline-primary";
+      
       btn.innerText = "blak";
       document.body.append(btn);
      
      btn.addEventListener("click",function(){
-        images.appendChild(image);
+        images.appendChild(image); 
         btn.remove();
     
     });
@@ -50,8 +51,29 @@ function ShowImage(file) {
     image.append(img);
     image.append(closeBtton);
     images.appendChild(image);
-    img.ondblclick = function () {
-      img.style.boxShadow = "0px 0px 10px blue";
+    image.ondblclick = function () {
+      Arr.push(image);
+      image.style.boxShadow = "0px 0px 10px blue";
+      
+     
+ let btnn = document.createElement("button");
+      btnn.className = "btn btn-outline-danger";
+      btnn.innerText = "Remove";
+   
+     
+      document.body.append(btnn);
+
+      btnn.addEventListener("click",function(){
+        Arr.forEach((arr) =>{
+          if(!(arr.style.boxShadow == "0px 0px 10px blue")){
+            arr.remove();
+            btnn.remove();
+          }
+        })
+          
+
+        
+      })
     };
   });
 }
